@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="nl">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <title>Tijd voor verandering—Verkiezingsprogramma GroenLinks 2017–2021</title>
+    <meta name="description" content="description">
+
+    <link rel="stylesheet" href="./normalize.css">
+    <link rel="stylesheet" href="./main.css">
+
+</head>
+<body id="body" class="">
+
+
+
+    <div id="app">
+
+        <header id="site-header" role="banner">
+            <a href="/"><h1 id="site-title">Tijd voor verandering—Verkiezingsprogramma GroenLinks 2017–2021</h1></a>
+        </header>
+
+        <router-view class="view">
+        </router-view>
+
+        <footer id="site-footer">
+            <small>Deze website en de GroenLinksProgramma-twitterbot zijn gemaakt door <a href="https://twitter.com/flobin">Robin</a> en zijn geen officiële GroenLinks uitingen.</small>
+        </footer>
+
+    </div>
+
+    <template id="punten-listing-template">
+        <ul class="listing">
+            <li v-for="punt in punten" class="listing-punt">
+                <router-link :to="{ name: 'punt', params: { slug: punt.slug }}">{{ punt.tekst_kort }}</router-link>
+            </li>
+        </ul>
+    </template>
+
+    <template id="punt-detail-template">
+        <article class="punt">
+            <nav>
+                <router-link to="/">Terug naar de lijst</router-link>
+            </nav>
+            <header>
+                <h2>{{ punt.tekst_kort }}</h2>
+            </header>
+            <section>
+                <p>
+                    {{ punt.tekst_vol }}
+                </p>
+            </section>
+        </article>
+    </template>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script src="./node_modules/vue-resource/dist/vue-resource.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
