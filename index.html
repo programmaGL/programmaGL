@@ -20,24 +20,29 @@
     <div id="app">
 
         <header id="site-header" role="banner">
-            <a href="/"><h1 id="site-title">Tijd voor verandering—Verkiezingsprogramma GroenLinks 2017–2021</h1></a>
+            <a href="/"><h1 id="site-title">Tijd voor verandering</h1></a>
+            <p class="sub-title">
+                GroenLinks verkiezingspgrogramma 2017-2021
+            </p>
         </header>
-
+        <nav class="site-nav">
+            <a href="/">Lijst met punten</a> | <a href="/over">Over deze website</a>
+        </nav>
         <router-view class="view">
         </router-view>
 
         <footer id="site-footer">
-            <small>Deze website en de GroenLinksProgramma-twitterbot zijn gemaakt door <a href="https://twitter.com/flobin">Robin</a> en zijn geen officiële GroenLinks uitingen.</small>
+            <small>Deze website en de <a href="https://twitter.com/programmaGL">GroenLinksProgramma-twitterbot</a> zijn gemaakt door <a href="https://twitter.com/flobin">Robin</a> en zijn geen officiële GroenLinks uitingen.</small>
         </footer>
 
     </div>
 
     <template id="punten-listing-template">
-        <ul class="listing">
+        <ol class="listing">
             <li v-for="punt in punten" class="listing-punt">
-                <router-link :to="{ name: 'punt', params: { slug: punt.slug }}">{{ punt.tekst_kort }}</router-link>
+                <router-link :to="{ name: 'punt', params: { slug: punt.slug }}">{{ punt.tekst.substring(0,85) }}…</router-link>
             </li>
-        </ul>
+        </ol>
     </template>
 
     <template id="punt-detail-template">
@@ -45,20 +50,41 @@
             <nav>
                 <router-link to="/">Terug naar de lijst</router-link>
             </nav>
-            <header>
-                <h2>{{ punt.tekst_kort }}</h2>
-            </header>
-            <section>
+            <main>
                 <p>
-                    {{ punt.tekst_vol }}
+                    {{ punt.tekst }}
                 </p>
-            </section>
+            </main>
         </article>
     </template>
 
-    <script src="./node_modules/vue/dist/vue.js"></script>
-    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
-    <script src="./node_modules/vue-resource/dist/vue-resource.js"></script>
+    <template id="not-found-template">
+        <p>
+            Oeps, de pagina die u zocht bestaat waarschijnlijk niet. Misschien staat ‘ie in de <router-link :to="{ name: 'puntenlisting'}">lijst van punten</router-link>.
+        </p>
+    </template>
+
+    <template id="over-template">
+        <article class="over">
+            <header>
+                <h2>Wat is dit?</h2>
+            </header>
+            <main>
+                <p>
+                    Wie heeft er nou zin om een heel verkiezingsprogramma van 78 pagina’s door te lezen? Nou, ik. Maar ik kan me goed voorstellen dat dat niet geldt voor iedereen. Ik ga ook niet alle programma’s lezen. Maar eigenlijk is dat jammer, want in het <a href="https://groenlinks.nl/programma">verkiezingsprogramma van GroenLinks</a> staan een heleboel goede ideeën. Daarom leek me het een goed idee om een Twitter-account te maken die het programma van GroenLinks post. Dan hoef je je alleen maar die account te volgen en het programma verschijnt vanzelf in je Twitter-feed.
+                </p>
+                <p>
+                     Deze website is geen officiële GroenLinks-website en de bijbehorende Twitter-account is ook niet een officiële GroenLinks-account. Ik heb ze gewoon in mijn vrije tijd gemaakt, omdat ik het leuk vond.
+                </p>
+                <p>
+                    Zie je ergens een foutje? Laat me het weten! Stuur een berichtje naar me op <a href="https://twitter.com/flobin">Twitter</a> en dan ga ik proberen om het zo snel mogelijk te fixen.
+                </p>
+            </main>
+        </article>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.1/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.3.0/vue-router.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
